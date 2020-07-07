@@ -52,7 +52,7 @@ sql.on("error", (err) => {
 });
 
 
-InsertTenant(2, 'Angelo', 'Mertel', '5642250', '249862')
+//InsertTenant(2, 'Angelo', 'Mertel', '5642250', '249862')
 
   // -- InsertTenant --
   // if returnValue -1, tenant already exists
@@ -78,7 +78,7 @@ function InsertTenant(unitNo, firstname, lastname, phoneNo, bankDetails){
   })
 }
 
-ModifyTenant(100000010, 'Jensi', 'Spahni', '0000000', '-5555555')
+//ModifyTenant(100000010, 'Jensi', 'Spahni', '0000000', '-5555555')
 
 // Modify tenants data (without address, balance) 
 function ModifyTenant(tenantNo, firstname, lastname, phoneNo, bankDetails){
@@ -124,18 +124,70 @@ function DeleteTenant(tenantNo){
   })
 }
 
+getPropertyList()
+
 function getPropertyList(){
-sql
-  .connect(config)
-  .then((pool) => {
-    // Query
-    return pool.request().query("SELECT * FROM [Tables.group6_ProperyList]");
-  })
-  .then((result) => {
-    console.dir(result);
-    console.log(result)
-  })
-  .catch((err) => {
-    console.log(err);
+  sql.connect(config)
+    .then((pool) => {
+      // Query
+      return pool.request().query("SELECT * FROM group6_ProperyList");
+    })
+    .then((result) => {
+      console.dir(result);
+      console.log('PropertyList\n' + result)
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+}
+
+getUnitList()
+
+function getUnitList(){
+  sql.connect(config)
+    .then((pool) => {
+      // Query
+      return pool.request().query("SELECT * FROM group6_UnitList");
+    })
+    .then((result) => {
+      console.dir(result);
+      console.log('UnitList\n' + result)
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+}
+
+getUnitDetails()
+
+function getUnitDetails(){
+  sql.connect(config)
+    .then((pool) => {
+      // Query
+      return pool.request().query("SELECT * FROM group6_UnitDetails");
+    })
+    .then((result) => {
+      console.dir(result);
+      console.log('UnitDetails' + result)
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+}
+
+getTenantWithNegativeBalance()
+
+function getTenantWithNegativeBalance(){
+  sql.connect(config)
+    .then((pool) => {
+      // Query
+      return pool.request().query("SELECT * FROM group6_NegativeBalance");
+    })
+    .then((result) => {
+      console.dir(result);
+      console.log('TenantWithNegativeBalance' + result)
+    })
+    .catch((err) => {
+      console.log(err);
   });
 }
